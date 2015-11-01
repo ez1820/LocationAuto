@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Rent a car EF - </title>
+    <title>Rent a car EF - Book</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -30,11 +30,9 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 </head>
-
-<body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <body>
+        <!-- Header image -->
+       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -48,7 +46,7 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                 <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav">
                     <li>
                         <a href="../Client/Search.html">Search a Car</a>
                     </li>
@@ -65,89 +63,47 @@
 
 
                 </ul>
+
             </div>
             <!-- /.navbar-collapse -->
+
         </div>
         <!-- /.container -->
     </nav>
 
-    <!-- Page Content -->
-    <div class="container">
-
-        <!-- Portfolio Item Heading -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Make Model
-                    <small>Car category</small>
-                </h1>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <!-- Portfolio Item Row -->
-        <div class="row">
-
-            <div class="col-md-8">
-                <img class="img-responsive" src="http://placehold.it/750x500" alt="">
-            </div>
-
-            <div class="col-md-4">
-                <h3>Car Description</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
-                <h3>Car specification</h3>
-                <ul>
-                    <li>Specification 1</li>
-                    <li>Specification 2</li>
-                    <li>Specification 3</li>
-                    <li>Specification 4</li>
-                </ul>
-                <br>
-                <br>
-                <br>
-                <div class="input-group-btn select" id="select1">
-                    
-                        <h3>Car price / per hours</h3><a href="#" class="btn btn-info btn-lg">Place a reservation</a>
+        <!-- Resultat de recherche -->
+        <div class="container">
+            <h2>Please, fill the field to confirm the booking</h2>
+            <hr/> 
+            <form role="form">
+                <div class="row form-group">
+                
+                </div>
+                <div class="row setup-content" id="step-1">
+                    <div class="col-xs-12">
+                        <div class="col-md-12 well">
+                            <h1 class="text-center"> Personnal information</h1>
+                            <div class="form-group">
+                                <label for="nom"></label>
+                                <input type="text" class="form-control" id="nom" placeholder="John Smith">
+                                </div>
+                                <div class="form-group">
+                                    <label for="adresse">Email</label>
+                                    <input type="text" class="form-control" id="adresse" placeholder="example@LAFR.ca">
+                                </div>
+                            <button id="activate-step-2" class="btn btn-primary btn-lg">Book</button>
+                        </div>
                     </div>
-            </div>
-
+                </div>
+                <!--<div class="row setup-content" id="step-3">
+                    <div class="col-xs-12">
+                        <div class="col-md-12 well">
+                            <h1 class="text-center"> STEP 3</h1>
+                        </div>
+                    </div>
+                </div>-->                                                     
+            </form>
         </div>
-        <!-- /.row -->
-
-        <!-- Related Projects Row -->
-        <div class="row">
-
-            <div class="col-lg-12">
-                <h3 class="page-header">Pictures</h3>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-        </div>
-        <!-- /.row -->
-
-        <hr>
 
         <!-- Footer -->
         <footer>
