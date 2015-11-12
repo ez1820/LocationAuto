@@ -1,10 +1,7 @@
 package dataImporter;
 
 import controller.CarController;
-import model.CarBodyStyle;
-import model.CarModel;
-import model.Color;
-import model.Transmission;
+import model.*;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -36,6 +33,8 @@ public class DataImporter {
 
         //CarController.getInstance().insertBodyStyle(bodyStyleList);
 
+
+        //add transmission
         List<Transmission> transmissionList = getListTransmission();
         CarController.getInstance().insertTransmission(transmissionList);
 
@@ -116,5 +115,16 @@ public class DataImporter {
 
         return transmissionList;
     }
+    public static List<Customer> getListCustmer()
+    {
+        List<Customer> customerList = new ArrayList<Customer>();
+        List<String> customerFistName = new ArrayList<String>();
+        List<String> customerlastName = new ArrayList<String>();
 
+        customerFistName.add("");
+        customerFistName.add("");
+        customerFistName.add("");
+
+        return customerList;
+    }
 }
