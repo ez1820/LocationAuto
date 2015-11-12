@@ -40,11 +40,21 @@ public class DaoConnectionManager {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             oracleConnection = DriverManager.getConnection(AppConfig.ORACLE_URL, AppConfig.ORACLE_USERNAME, AppConfig.ORACLE_PASSWORD);
+            oracleConnection.setAutoCommit(true);
         } catch (ClassNotFoundException e) {
             System.out.println("Where is your Oracle JDBC Driver?");
             e.printStackTrace();
         } catch (SQLException e) {
             System.out.println("Connection Failed! Check output console");
+            e.printStackTrace();
+        }
+    }
+
+    public void closeConnection(){
+        try {
+            oracleConnection.close();
+            oracleConnection = null;
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

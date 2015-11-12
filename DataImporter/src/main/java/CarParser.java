@@ -1,4 +1,3 @@
-import model.Car;
 import model.CarCompany;
 import model.CarModel;
 import org.json.simple.JSONArray;
@@ -31,7 +30,7 @@ public class CarParser {
         CarCompany carCompany = null;
         CarModel carModel = null;
 
-        List <CarModel> carModelList = new ArrayList<CarModel>();;
+        List <CarModel> carModelList = new ArrayList<CarModel>();
 
         for(Object object : carArrayList)
 

@@ -16,6 +16,16 @@ import dao.DaoCustomer.DaoInterfaceCustomer;
  */
 public class Dao implements DaoInterface{
     private static Dao instance = null;
+    private DaoInterfaceModel daoModel = null;
+    private DaoInterfaceCompany daoCompany = null;
+    private DaoInterfaceColor daoColor = null;
+    private DaoInterfaceBodyStyle daoBodyStyle = null;
+    private DaoInterfaceTransmission daoTransmission = null;
+    private DaoInterfaceLocation daoLocation = null;
+    private DaoInterfaceCustomer daoCustomer = null;
+    private DaoInterfaceReservation daoReservation = null;
+    private DaoInterfaceCar daoCar = null;
+
 
     public static Dao getInstance(){
         if (instance == null){
@@ -33,39 +43,139 @@ public class Dao implements DaoInterface{
     private Dao(){}
 
     public DaoInterfaceModel getDaoModel() {
-        return (DaoInterfaceModel) getObjectFromClassName(AppConfig.DAO_MODEL);
+        if (daoModel == null){
+            createDaoModel();
+        }
+        return daoModel;
     }
 
+    private synchronized void createDaoModel() {
+        if (daoModel == null){
+            daoModel = (DaoInterfaceModel) getObjectFromClassName(AppConfig.DAO_MODEL);
+        }
+    }
+
+
     public DaoInterfaceCompany getDaoCompany() {
-        return (DaoInterfaceCompany) getObjectFromClassName(AppConfig.DAO_COMPANY);
+        if(daoCompany == null){
+            createDaoCompany();
+        }
+        return daoCompany;
+    }
+
+    private synchronized void createDaoCompany() {
+        if (daoCompany == null){
+            daoCompany = (DaoInterfaceCompany) getObjectFromClassName(AppConfig.DAO_COMPANY);
+        }
     }
 
     public DaoInterfaceColor getDaoColor() {
-        return (DaoInterfaceColor) getObjectFromClassName(AppConfig.DAO_COLOR);
+        if(daoColor == null)
+        {
+            createDaoColor();
+        }
+        return daoColor;
+    }
+
+    private synchronized void createDaoColor() {
+        if(daoColor == null)
+        {
+            daoColor = (DaoInterfaceColor) getObjectFromClassName(AppConfig.DAO_COLOR);
+        }
     }
 
     public DaoInterfaceBodyStyle getDaoBodyStyle() {
-        return (DaoInterfaceBodyStyle) getObjectFromClassName(AppConfig.DAO_BODYSTYLE);
+        if(daoBodyStyle == null)
+        {
+            createDaoBodyStyle();
+        }
+
+        return daoBodyStyle;
     }
 
-    public DaoInterfaceTransmission getDaoTransmission() {
-        return (DaoInterfaceTransmission) getObjectFromClassName(AppConfig.DAO_TRANSMISSION);
+    private synchronized void  createDaoBodyStyle() {
+        if(daoBodyStyle == null)
+        {
+            daoBodyStyle = (DaoInterfaceBodyStyle) getObjectFromClassName(AppConfig.DAO_BODYSTYLE);
+        }
+    }
+
+    public DaoInterfaceTransmission getDaoTransmission()
+    {
+        if(daoTransmission ==  null)
+        {
+            createDaoTransmission();
+        }
+        return daoTransmission;
+    }
+
+    private synchronized void createDaoTransmission() {
+        if(daoTransmission == null)
+        {
+            daoTransmission = (DaoInterfaceTransmission) getObjectFromClassName(AppConfig.DAO_TRANSMISSION);
+        }
+
     }
 
     public DaoInterfaceLocation getDaoLocation() {
-        return (DaoInterfaceLocation) getObjectFromClassName(AppConfig.DAO_LOCATION);
+        if(daoLocation == null)
+        {
+            createDaoLocation();
+        }
+        return daoLocation;
+    }
+
+    private synchronized void createDaoLocation() {
+        if(daoLocation == null)
+        {
+            daoLocation = (DaoInterfaceLocation) getObjectFromClassName(AppConfig.DAO_LOCATION);
+        }
     }
 
     public DaoInterfaceCustomer getDaoCustomer() {
-        return (DaoInterfaceCustomer) getObjectFromClassName(AppConfig.DAO_CUSTOMER);
+        if(daoCustomer == null)
+        {
+            createDaoCustomer();
+        }
+        return daoCustomer;
+    }
+
+    private synchronized void createDaoCustomer() {
+        if(daoCustomer == null)
+        {
+            daoCustomer = (DaoInterfaceCustomer) getObjectFromClassName(AppConfig.DAO_CUSTOMER);
+        }
     }
 
     public DaoInterfaceCar getDaoCar() {
-        return (DaoInterfaceCar) getObjectFromClassName(AppConfig.DAO_CAR);
+        if(daoCar == null)
+        {
+            createDaoCar();
+        }
+        return daoCar;
+    }
+
+    private synchronized void createDaoCar()
+    {
+        if(daoCar == null)
+        {
+            daoCar = (DaoInterfaceCar) getObjectFromClassName(AppConfig.DAO_CAR);
+        }
     }
 
     public DaoInterfaceReservation getDaoReservation() {
-        return (DaoInterfaceReservation) getObjectFromClassName(AppConfig.DAO_RESERVATION);
+        if(daoReservation ==  null)
+        {
+            createDaoReservation();
+        }
+        return daoReservation;
+    }
+
+    private synchronized void createDaoReservation() {
+        if(daoReservation ==  null)
+        {
+            daoReservation = (DaoInterfaceReservation) getObjectFromClassName(AppConfig.DAO_RESERVATION);
+        }
     }
 
     private Object getObjectFromClassName(String className){

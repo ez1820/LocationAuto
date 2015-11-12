@@ -3,19 +3,57 @@ package dao.DaoCarLocation;
 import dao.DaoConnectionManager;
 import model.CarLocation;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * Created by admin on 2015-10-15.
  */
 public class DaoCarLocationOracle implements DaoInterfaceLocation {
+    PreparedStatement addLocationPreparedStatement;
+    PreparedStatement deleteLocationPreparedStatement;
+    PreparedStatement updateLocationPreparedStatement;
+    private void loadPrepareStatement() {
+        Connection connection = getConnection();
+        try {
 
+            addLocationPreparedStatement = connection.prepareStatement("insert into CarLocation (carLocationID, locationX, locationY) VALUES (null, ?,?)");
+            //ON DUPLICATE KEY UPDATE companyID=?, companyName=?
+            /*
+            deleteBodyStylePreparedStatement = connection.prepareStatement("");
+            updateBodyStylePreparedStatement = connection.prepareStatement("");
+            */
+        } catch (SQLException e) {
+            DaoConnectionManager.getInstance().closeConnection();
+            e.printStackTrace();
+        }
+    }
 
     public void addLocation(CarLocation carLocation) {
+        try {
 
+            addLocationPreparedStatement.setFloat(1, carLocation.getLocationX());
+            addLocationPreparedStatement.setFloat(1, carLocation.getLocationY());
+
+            //TODO: trouver le bon ID
+            //addCompagnyPreparedStatement.executeUpdate();
+            addLocationPreparedStatement.executeUpdate();
+
+            /*ResultSet generatedKeysID = addCompagnyPreparedStatement.getGeneratedKeys();
+
+            if(generatedKeysID.next())
+            {
+                int carID = generatedKeysID.getInt(1);
+                System.out.println(carID);
+                carCompany.setCompanyID(carID);
+                //carCompany.setCompanyID((int) generatedKeysID.getLong(1));
+                //System.out.println("blabla" + generatedKeysID.getLong(1));
+            }
+            */
+            //carCompany.setCompanyID(id);
+        } catch (SQLException e) {
+            DaoConnectionManager.getInstance().closeConnection();
+            e.printStackTrace();
+        }
     }
 
     public void deleteLocation(CarLocation carLocation) {

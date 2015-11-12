@@ -9,6 +9,8 @@ public class Color {
     private String colorName;
 
 
+    public Color(){}
+
     public int getColorID() {
         return colorID;
     }

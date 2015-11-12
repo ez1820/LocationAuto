@@ -8,7 +8,7 @@ public class CarBodyStyle {
     private int carBodyStyleID;
     private String bodyStyle;
 
-
+    public CarBodyStyle (){}
     public CarBodyStyle(int carBodyStyleID, String bodyStyle) {
         this.carBodyStyleID = carBodyStyleID;
         this.bodyStyle = bodyStyle;
@@ -32,7 +32,8 @@ public class CarBodyStyle {
         this.carBodyStyleID = carBodyStyleID;
     }
 
-   
+
+
 
 
 

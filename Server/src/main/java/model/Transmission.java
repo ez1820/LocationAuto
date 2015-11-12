@@ -24,7 +24,10 @@ public class Transmission {
         this.transmissionID = transmissionID;
     }
 
+    public Transmission()
+    {
 
+    }
     public Transmission(int transmissionID, String transmissionName) {
         this.transmissionID = transmissionID;
         this.transmissionName = transmissionName;

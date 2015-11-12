@@ -2,12 +2,10 @@ package dao.DaoCarColor;
 
 import dao.DaoCarColor.DaoInterfaceColor;
 import dao.DaoConnectionManager;
+import model.CarCompany;
 import model.Color;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * Created by admin on 2015-10-15.
@@ -16,8 +14,56 @@ public class DaoCarColorOracle implements DaoInterfaceColor {
 
 
 
+    PreparedStatement addColorPreparedStatement;
+    PreparedStatement deleteColorPreparedStatement;
+    PreparedStatement updateColorPreparedStatement;
+
+    public DaoCarColorOracle(){
+        loadPrepareStatement();
+    }
+
+    private void loadPrepareStatement() {
+        Connection connection = getConnection();
+        try {
+
+            addColorPreparedStatement = connection.prepareStatement("insert into Color (colorID, colorName) VALUES (null, ?)");
+
+            //ON DUPLICATE KEY UPDATE companyID=?, companyName=?
+            /*
+            deleteColorPreparedStatement = connection.prepareStatement("");
+            updateColorPreparedStatement = connection.prepareStatement("");
+            */
+        } catch (SQLException e) {
+            DaoConnectionManager.getInstance().closeConnection();
+            e.printStackTrace();
+        }
+    }
+
     public void addColor(Color color)
     {
+        try {
+
+            addColorPreparedStatement.setString(1, color.getColorName());
+            //TODO: trouver le bon ID
+            //addCompagnyPreparedStatement.executeUpdate();
+            addColorPreparedStatement.executeUpdate();
+
+            /*ResultSet generatedKeysID = addCompagnyPreparedStatement.getGeneratedKeys();
+
+            if(generatedKeysID.next())
+            {
+                int carID = generatedKeysID.getInt(1);
+                System.out.println(carID);
+                carCompany.setCompanyID(carID);
+                //carCompany.setCompanyID((int) generatedKeysID.getLong(1));
+                //System.out.println("blabla" + generatedKeysID.getLong(1));
+            }
+            */
+            //carCompany.setCompanyID(id);
+        } catch (SQLException e) {
+            DaoConnectionManager.getInstance().closeConnection();
+            e.printStackTrace();
+        }
 
     }
 

@@ -3,37 +3,65 @@ package dao.DaoCarModel;
 import dao.DaoConnectionManager;
 import model.CarModel;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * Created by admin on 2015-10-15.
  */
 public class DaoCarModelOracle implements DaoInterfaceModel {
 
-    public void addModel(CarModel carModel) {
+    PreparedStatement addModelPreparedStatement;
+    PreparedStatement deleteModelPreparedStatement;
+    PreparedStatement updateModelPreparedStatement;
+
+    private int companyID;
+
+
+    public DaoCarModelOracle(){
+        loadPrepareStatement();
+    }
+
+
+    private void loadPrepareStatement() {
         Connection connection = getConnection();
+        try {
+            System.out.println("test");
+            addModelPreparedStatement = connection.prepareStatement("insert into CarModel (carModelID, carCompanyID, modelName) VALUES (null, ?,?)", new String[]{"carmodelID","carCompanyID"});/*
+            deleteModelPreparedStatement = connection.prepareStatement("");
+            updateModelPreparedStatement = connection.prepareStatement("");*/
+        } catch (SQLException e) {
+            DaoConnectionManager.getInstance().closeConnection();
+            e.printStackTrace();
+        }
+    }
 
-        /*
-        REQUEST
-         */
-        //.commit() ou autocommit sur la connection   connection.setAutoCommit(true);
 
-        Statement statement =  null;
-        String query = "Select * from autoTest";
+    public void addModel(CarModel carModel) {
 
         try {
-            statement = connection.createStatement();
-            ResultSet queryResult = statement.executeQuery(query);
+
+            addModelPreparedStatement.setInt(1, carModel.getCarCompany().getCompanyID());
+            addModelPreparedStatement.setString(2, carModel.getModelName());
+            //TODO: Trouver le bon ID
+            addModelPreparedStatement.executeUpdate();
+            ResultSet generatedKeysID = addModelPreparedStatement.getGeneratedKeys();
+
+            if(generatedKeysID.next())
+            {
+                int companyID = generatedKeysID.getInt(1);
+                int carModelID = generatedKeysID.getInt(2);
+
+                System.out.println("Id de la compagnie / " + companyID);
+                System.out.println("Id du modele inserer dans la compagnie /" + carModelID);
+
+                carModel.setCarModelID(carModelID);
+                //carCompany.setCompanyID((int) generatedKeysID.getLong(1));
+                //System.out.println("blabla" + generatedKeysID.getLong(1));
+            }
 
 
-            // Fermer la connexion une fois le traitement fini.
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.print("prob resultat query");
         }
 
 

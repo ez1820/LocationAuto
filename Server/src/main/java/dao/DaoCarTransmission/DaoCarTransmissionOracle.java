@@ -4,20 +4,61 @@ import dao.DaoCarTransmission.DaoInterfaceTransmission;
 import dao.DaoConnectionManager;
 import model.Transmission;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * Created by admin on 2015-10-15.
  */
 public class DaoCarTransmissionOracle implements DaoInterfaceTransmission {
+    PreparedStatement addTransmissionPreparedStatement;
+    PreparedStatement deleteTransmissionPreparedStatement;
+    PreparedStatement updateTransmissionPreparedStatement;
 
+    public DaoCarTransmissionOracle()
+    {
+        loadPrepareStatement();
+    }
+    private void loadPrepareStatement() {
+        Connection connection = getConnection();
+        try {
+
+            addTransmissionPreparedStatement = connection.prepareStatement("insert into Transmission (transmissionID, transmissionName) VALUES (null, ?)");
+            //ON DUPLICATE KEY UPDATE companyID=?, companyName=?
+            /*
+            deleteTransmissionPreparedStatement = connection.prepareStatement("");
+            updateTransmissionPreparedStatement = connection.prepareStatement("");
+            */
+        } catch (SQLException e) {
+            DaoConnectionManager.getInstance().closeConnection();
+            e.printStackTrace();
+        }
+    }
 
     public void addTransmission(Transmission transmission)
     {
+        try {
 
+            addTransmissionPreparedStatement.setString(1, transmission.getTransmissionName());
+            //TODO: trouver le bon ID
+            //addCompagnyPreparedStatement.executeUpdate();
+            addTransmissionPreparedStatement.executeUpdate();
+
+            /*ResultSet generatedKeysID = addCompagnyPreparedStatement.getGeneratedKeys();
+
+            if(generatedKeysID.next())
+            {
+                int carID = generatedKeysID.getInt(1);
+                System.out.println(carID);
+                carCompany.setCompanyID(carID);
+                //carCompany.setCompanyID((int) generatedKeysID.getLong(1));
+                //System.out.println("blabla" + generatedKeysID.getLong(1));
+            }
+            */
+            //carCompany.setCompanyID(id);
+        } catch (SQLException e) {
+            DaoConnectionManager.getInstance().closeConnection();
+            e.printStackTrace();
+        }
     }
 
     public void deleteTransmission(Transmission carTransmission) {

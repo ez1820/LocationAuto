@@ -1,19 +1,66 @@
 package dao.DaoCarCompany;
 import dao.DaoConnectionManager;
 import model.CarCompany;
+import oracle.sql.ROWID;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.Objects;
 
 /**
  * Created by admin on 2015-10-12.
  */
 public class DaoCarCompanyOracle implements DaoInterfaceCompany {
+    PreparedStatement addCompagnyPreparedStatement;
+    PreparedStatement deleteCompagnyPreparedStatement;
+    PreparedStatement updateCompagnyPreparedStatement;
+
+    public DaoCarCompanyOracle(){
+        loadPrepareStatement();
+    }
+
+    private void loadPrepareStatement() {
+        Connection connection = getConnection();
+        try {
+
+            addCompagnyPreparedStatement = connection.prepareStatement("insert into CarCompany (companyID, companyName) VALUES (null, ?)", new String[]{"CompanyId"});
+
+            /*
+            deleteCompagnyPreparedStatement = connection.prepareStatement("");
+            updateCompagnyPreparedStatement = connection.prepareStatement("");
+            */
+        } catch (SQLException e) {
+            DaoConnectionManager.getInstance().closeConnection();
+            e.printStackTrace();
+        }
+    }
 
     public void addCompany(CarCompany carCompany) {
+        try {
 
+
+            addCompagnyPreparedStatement.setString(1, carCompany.getCompanyName());
+            //TODO: trouver le bon ID
+            //addCompagnyPreparedStatement.executeUpdate();
+            addCompagnyPreparedStatement.executeUpdate();
+
+
+
+            ResultSet generatedKeysID = addCompagnyPreparedStatement.getGeneratedKeys();
+
+            if(generatedKeysID.next())
+            {
+                int carID = generatedKeysID.getInt(1);
+                System.out.println(carID);
+                carCompany.setCompanyID(carID);
+                //carCompany.setCompanyID((int) generatedKeysID.getLong(1));
+                //System.out.println("blabla" + generatedKeysID.getLong(1));
+            }
+
+            //carCompany.setCompanyID(id);
+        } catch (SQLException e) {
+            DaoConnectionManager.getInstance().closeConnection();
+            e.printStackTrace();
+        }
     }
 
     public void deleteCompany(CarCompany carCompany) {
