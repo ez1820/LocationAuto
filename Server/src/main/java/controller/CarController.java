@@ -1,11 +1,9 @@
 package controller;
 
 import dao.Dao;
-import model.CarBodyStyle;
-import model.CarModel;
-import model.Color;
-import model.Transmission;
+import model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -108,4 +106,60 @@ public class CarController {
 
         }
     }
+    public void insertCustomer(List<Customer> customerList)
+    {
+        System.out.println("Inserting Customer");
+        int i=1;
+        for (Customer c : customerList)
+        {
+
+            insertCustomer(c);
+            System.out.println(i + " customer inserted / " + c.getFirstName() + "" + c.getLastName());
+            i++;
+        }
+    }
+    private void insertCustomer(Customer customer)
+    {
+        if(customer.getCustomerID() == 0)
+        {
+            Dao.getInstance().getDaoCustomer().addCustomer(customer);
+        }
+
+    }
+    public void insertLocation(List<CarLocation> locationList)
+    {
+        System.out.println("Inserting location");
+        int i=1;
+        for (CarLocation c : locationList)
+        {
+
+            insertLocation(c);
+            System.out.println(i + " location inserted / " + c.getLocationX() + "" + c.getLocationY());
+            i++;
+        }
+    }
+
+    private void insertLocation(CarLocation carLocation)
+    {
+        if(carLocation.getCarLocationID()==0)
+        {
+            Dao.getInstance().getDaoLocation().addLocation(carLocation);
+        }
+    }
+
+    public List<CarModel> getAllModels()
+    {
+        List<CarModel> carModelList;
+
+        carModelList = Dao.getInstance().getDaoModel().getAllModels();
+
+        return carModelList;
+    }
+    public List<Transmission> getAllTranmission()
+    {
+        List<Transmission> carTransmissionList;
+
+        return null;
+    }
+
 }

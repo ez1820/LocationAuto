@@ -12,6 +12,12 @@ public class DaoCarLocationOracle implements DaoInterfaceLocation {
     PreparedStatement addLocationPreparedStatement;
     PreparedStatement deleteLocationPreparedStatement;
     PreparedStatement updateLocationPreparedStatement;
+
+    public DaoCarLocationOracle()
+    {
+        loadPrepareStatement();
+    }
+
     private void loadPrepareStatement() {
         Connection connection = getConnection();
         try {
@@ -32,7 +38,7 @@ public class DaoCarLocationOracle implements DaoInterfaceLocation {
         try {
 
             addLocationPreparedStatement.setFloat(1, carLocation.getLocationX());
-            addLocationPreparedStatement.setFloat(1, carLocation.getLocationY());
+            addLocationPreparedStatement.setFloat(2, carLocation.getLocationY());
 
             //TODO: trouver le bon ID
             //addCompagnyPreparedStatement.executeUpdate();

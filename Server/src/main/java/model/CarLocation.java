@@ -10,7 +10,9 @@ public class CarLocation {
     private float locationY;
 
 
+    public CarLocation(){
 
+    }
     public CarLocation(int carLocationID, float locationX, float locationY) {
         this.carLocationID = carLocationID;
         this.locationX = locationX;

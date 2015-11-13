@@ -1,9 +1,12 @@
 package dao.DaoCarModel;
 
 import dao.DaoConnectionManager;
+import model.CarCompany;
 import model.CarModel;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by admin on 2015-10-15.
@@ -13,6 +16,8 @@ public class DaoCarModelOracle implements DaoInterfaceModel {
     PreparedStatement addModelPreparedStatement;
     PreparedStatement deleteModelPreparedStatement;
     PreparedStatement updateModelPreparedStatement;
+    PreparedStatement getAllModelPreparedStatement;
+
 
     private int companyID;
 
@@ -29,6 +34,7 @@ public class DaoCarModelOracle implements DaoInterfaceModel {
             addModelPreparedStatement = connection.prepareStatement("insert into CarModel (carModelID, carCompanyID, modelName) VALUES (null, ?,?)", new String[]{"carmodelID","carCompanyID"});/*
             deleteModelPreparedStatement = connection.prepareStatement("");
             updateModelPreparedStatement = connection.prepareStatement("");*/
+            getAllModelPreparedStatement = connection.prepareStatement("Select * from CarModel");
         } catch (SQLException e) {
             DaoConnectionManager.getInstance().closeConnection();
             e.printStackTrace();
@@ -107,6 +113,49 @@ public class DaoCarModelOracle implements DaoInterfaceModel {
 
 
 
+    }
+
+    public List<CarModel> getAllModels() {
+
+
+        List<CarModel> modelList = new ArrayList<CarModel>();
+
+        try {
+
+            ResultSet result = getAllModelPreparedStatement.getResultSet();
+
+
+
+
+            if(result.next())
+            {
+                CarCompany carCompany =  new CarCompany();
+                CarModel carModel = new CarModel();
+                int carModelID = result.getInt(1);
+                int companyID = result.getInt(2);
+                String modelName = result.getString(3);
+
+                System.out.println("Id de la compagnie / " + companyID);
+                System.out.println("Id du modele  dans la compagnie /" + carModelID);
+
+                carCompany.setCompanyID(carModelID);
+                carModel.setCarCompany(carCompany);
+                carModel.setCarModelID(carModelID);
+                carModel.setModelName(modelName);
+
+
+                modelList.add(carModel);
+
+                //carCompany.setCompanyID((int) generatedKeysID.getLong(1));
+                //System.out.println("blabla" + generatedKeysID.getLong(1));
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return modelList;
     }
 
 

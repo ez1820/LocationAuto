@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DataImporter/DataImporter.iml" filepath="$PROJECT_DIR$/DataImporter/DataImporter.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/LocationAuto.iml" filepath="$PROJECT_DIR$/.idea/LocationAuto.iml" />
       <module fileurl="file://$PROJECT_DIR$/Server/PFE.iml" filepath="$PROJECT_DIR$/Server/PFE.iml" />
     </modules>

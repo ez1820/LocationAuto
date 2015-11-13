@@ -7,15 +7,14 @@ public class CarReservation {
 
     private int carReservationID;
     private int carID;
-    private int carLocationID;
+
     private int clientID;
     private float reservationPrice;
     private String reservationStatus;
 
-    public CarReservation(int carReservationID, int carID, int carLocationID, int clientID, float reservationPrice, String reservationStatus) {
+    public CarReservation(int carReservationID, int carID, int clientID, float reservationPrice, String reservationStatus) {
         this.carReservationID = carReservationID;
         this.carID = carID;
-        this.carLocationID = carLocationID;
         this.clientID = clientID;
         this.reservationPrice = reservationPrice;
         this.reservationStatus = reservationStatus;
@@ -35,14 +34,6 @@ public class CarReservation {
 
     public void setCarID(int carID) {
         this.carID = carID;
-    }
-
-    public int getCarLocationID() {
-        return carLocationID;
-    }
-
-    public void setCarLocationID(int carLocationID) {
-        this.carLocationID = carLocationID;
     }
 
     public int getClientID() {

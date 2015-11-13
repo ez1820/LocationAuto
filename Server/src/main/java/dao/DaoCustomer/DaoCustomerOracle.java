@@ -3,20 +3,65 @@ package dao.DaoCustomer;
 import dao.DaoConnectionManager;
 import model.Customer;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * Created by admin on 2015-10-15.
  */
 public class DaoCustomerOracle implements DaoInterfaceCustomer {
 
+    PreparedStatement addCustomerPreparedStatement;
+    PreparedStatement deleteCustomerPreparedStatement;
+    PreparedStatement updateCustomerPreparedStatement;
+
+    public DaoCustomerOracle ()
+    {
+        loadPreparedStatement();
+    }
+
+    private void loadPreparedStatement() {
+        Connection connection = getConnection();
+        try {
+
+            addCustomerPreparedStatement = connection.prepareStatement("insert into Customer (customerID, firstName, lastName) VALUES (null, ?,?)");
+            //ON DUPLICATE KEY UPDATE companyID=?, companyName=?
+            /*
+            deleteTransmissionPreparedStatement = connection.prepareStatement("");
+            updateTransmissionPreparedStatement = connection.prepareStatement("");
+            */
+        } catch (SQLException e) {
+            DaoConnectionManager.getInstance().closeConnection();
+            e.printStackTrace();
+        }
+    }
+
 
     public void addCustomer(Customer customer)
     {
+        try {
 
+            addCustomerPreparedStatement.setString(1, customer.getFirstName());
+            addCustomerPreparedStatement.setString(2, customer.getLastName());
+            //TODO: trouver le bon ID
+            //addCompagnyPreparedStatement.executeUpdate();
+            addCustomerPreparedStatement.executeUpdate();
+
+            /*ResultSet generatedKeysID = addCompagnyPreparedStatement.getGeneratedKeys();
+
+            if(generatedKeysID.next())
+            {
+                int carID = generatedKeysID.getInt(1);
+                System.out.println(carID);
+                carCompany.setCompanyID(carID);
+                //carCompany.setCompanyID((int) generatedKeysID.getLong(1));
+                //System.out.println("blabla" + generatedKeysID.getLong(1));
+            }
+            */
+            //carCompany.setCompanyID(id);
+        } catch (SQLException e) {
+            DaoConnectionManager.getInstance().closeConnection();
+            e.printStackTrace();
+        }
     }
 
     public void deleteCustomer(Customer Customer) {

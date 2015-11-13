@@ -12,16 +12,18 @@ public class Car {
     private int colorID;
     private float price;
     private String model;
+    private int carLocationID;
 
 
     public Car() {
 
     }
-    public Car(int carID, int carModelID, int carColorID, int carBodyStyleID, int year, int colorID, float price, String model) {
+    public Car(int carID, int carModelID, int carColorID, int carBodyStyleID, int carLocationID, int year, int colorID, float price, String model) {
         this.carID = carID;
         this.carModelID = carModelID;
         this.carColorID = carColorID;
         this.carBodyStyleID = carBodyStyleID;
+        this.carLocationID = carLocationID;
         this.year = year;
         this.colorID = colorID;
         this.price = price;
@@ -90,5 +92,13 @@ public class Car {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public int getCarLocationID() {
+        return carLocationID;
+    }
+
+    public void setCarLocationID(int carLocationID) {
+        this.carLocationID = carLocationID;
     }
 }
