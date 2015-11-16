@@ -10,6 +10,7 @@ import dao.DaoCar.DaoInterfaceCar;
 import dao.DaoCarReservation.DaoInterfaceReservation;
 import dao.DaoCarTransmission.DaoInterfaceTransmission;
 import dao.DaoCustomer.DaoInterfaceCustomer;
+import dao.DaoNode.DaoInterfaceNode ;
 
 /**
  * Created by admin on 2015-10-12.
@@ -25,6 +26,7 @@ public class Dao implements DaoInterface{
     private DaoInterfaceCustomer daoCustomer = null;
     private DaoInterfaceReservation daoReservation = null;
     private DaoInterfaceCar daoCar = null;
+    private DaoInterfaceNode daoNode = null ;
 
 
     public static Dao getInstance(){
@@ -177,6 +179,27 @@ public class Dao implements DaoInterface{
             daoReservation = (DaoInterfaceReservation) getObjectFromClassName(AppConfig.DAO_RESERVATION);
         }
     }
+
+    // ************
+    public DaoInterfaceNode getDaoNode()
+    {
+        if(daoNode ==  null)
+        {
+            createDaoNode();
+        }
+        return daoNode;
+    }
+
+    private synchronized void createDaoNode() {
+        if(daoNode == null)
+        {
+            daoNode = (DaoInterfaceNode) getObjectFromClassName(AppConfig.DAO_NODE);
+        }
+
+    }
+
+    // ************
+
 
     private Object getObjectFromClassName(String className){
         Object object = null;

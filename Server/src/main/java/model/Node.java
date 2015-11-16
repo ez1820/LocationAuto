@@ -11,7 +11,7 @@ package model;
  NodeNumb
  Lat
  Lon
-
+ nodetag
  */
 
 
@@ -20,7 +20,7 @@ public class Node {
     private int nodeID;
     private int NodeNumber ;
     private float latX ;
-    private float latY ;
+    private float lonY ;
     private String tag ;
 
     public Node(){
@@ -28,11 +28,11 @@ public class Node {
 
     }
 
-    public Node(int nodeID,int NodeNumber, float latX, float latY, String tag) {
+    public Node(int nodeID,int NodeNumber, float latX, float lonY, String tag) {
         this.nodeID = nodeID;
         this.NodeNumber = NodeNumber ;
         this.latX = latX ;
-        this.latY = latY ;
+        this.lonY = lonY ;
         this.tag = tag ;
     }
 
@@ -72,12 +72,29 @@ public class Node {
         return latX ;
     }
 
-// set the actual latY
+// set the actual latX
 
-    public void setLatx ( float latY){
+    public void setLatX ( float latX){
 
-        this.latY = latY ;
+        this.latX = latX ;
     }
+
+
+    //get the actual lonY
+
+    public float getLonY() {
+
+        return lonY ;
+    }
+
+// set the actual lonY
+
+    public void setLonY ( float lonY){
+
+        this.lonY = lonY ;
+    }
+
+
 
 //get the actual node tag
 

@@ -16,6 +16,7 @@ public class AppConfig {
     public static final String DAO_LOCATION_ORACLE = "dao.DaoCarLocation.DaoCarLocationOracle";
     public static final String DAO_RESERVATION_ORACLE = "dao.DaoCarReservation.DaoCarReservationOracle";
     public static final String DAO_CUSTOMER_ORACLE = "dao.DaoCustomer.DaoCustomerOracle";
+    public static final String DAO_NODE_ORACLE = "dao.DaoNode.DaoNodeOracle";
 
 
 
@@ -32,7 +33,7 @@ public class AppConfig {
     public static final String DAO_LOCATION = DAO_LOCATION_ORACLE;
     public static final String DAO_RESERVATION = DAO_RESERVATION_ORACLE;
     public static final String DAO_CUSTOMER = DAO_CUSTOMER_ORACLE;
-
+    public static final String DAO_NODE = "DAO_NODE_ORACLE";
 
 
 

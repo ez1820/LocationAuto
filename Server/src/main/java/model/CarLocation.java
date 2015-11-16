@@ -3,6 +3,7 @@ package model;
 /**
  * Created by admin on 2015-10-08.
  */
+
 public class CarLocation {
 
     private int carLocationID;
