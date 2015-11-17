@@ -2,9 +2,13 @@ package dao.DaoCarTransmission;
 
 import dao.DaoCarTransmission.DaoInterfaceTransmission;
 import dao.DaoConnectionManager;
+import model.CarCompany;
+import model.CarModel;
 import model.Transmission;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by admin on 2015-10-15.
@@ -13,6 +17,7 @@ public class DaoCarTransmissionOracle implements DaoInterfaceTransmission {
     PreparedStatement addTransmissionPreparedStatement;
     PreparedStatement deleteTransmissionPreparedStatement;
     PreparedStatement updateTransmissionPreparedStatement;
+    PreparedStatement getAllTransmissionsPreparedStatement;
 
     public DaoCarTransmissionOracle()
     {
@@ -28,6 +33,7 @@ public class DaoCarTransmissionOracle implements DaoInterfaceTransmission {
             deleteTransmissionPreparedStatement = connection.prepareStatement("");
             updateTransmissionPreparedStatement = connection.prepareStatement("");
             */
+            getAllTransmissionsPreparedStatement = connection.prepareStatement("select * from transmission");
         } catch (SQLException e) {
             DaoConnectionManager.getInstance().closeConnection();
             e.printStackTrace();
@@ -42,6 +48,11 @@ public class DaoCarTransmissionOracle implements DaoInterfaceTransmission {
             //TODO: trouver le bon ID
             //addCompagnyPreparedStatement.executeUpdate();
             addTransmissionPreparedStatement.executeUpdate();
+            //ResultSet result = getAllTransmissionsPreparedStatement.getResultSet();
+            //getConnection().commit();
+            addTransmissionPreparedStatement.getConnection().commit();
+
+
 
             /*ResultSet generatedKeysID = addCompagnyPreparedStatement.getGeneratedKeys();
 
@@ -100,6 +111,46 @@ public class DaoCarTransmissionOracle implements DaoInterfaceTransmission {
             System.out.print("prob resultat query");
         }
     }
+
+    public List<Transmission> getAllTransmissions() {
+        List<Transmission> TransmissionList = new ArrayList<Transmission>();
+
+        try {
+
+            getAllTransmissionsPreparedStatement.executeQuery();
+
+            ResultSet result = getAllTransmissionsPreparedStatement.getResultSet();
+
+            System.out.println("asdasd  " + result.getFetchSize());
+
+            while(result.next())
+            {
+
+                Transmission transmission = new Transmission();
+
+                int transmissionID = result.getInt(1);
+                String transmissionName = result.getString(2);
+
+
+                transmission.setTransmissionID(transmissionID);
+                transmission.setTransmissionName(transmissionName);
+
+                System.out.println("transmission ID :  " + transmissionID + "  transmission name: " + transmissionName);
+
+                TransmissionList.add(transmission);
+
+
+            }
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return TransmissionList;
+    }
+
     private Connection getConnection(){
         return DaoConnectionManager.getInstance().getOracleConnection();
     }

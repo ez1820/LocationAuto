@@ -2,8 +2,13 @@ package dao.DaoCarBodyStyle;
 
 import dao.DaoConnectionManager;
 import model.CarBodyStyle;
+import model.CarCompany;
+import model.CarModel;
+import model.Transmission;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by admin on 2015-10-15.
@@ -12,6 +17,7 @@ public class DaoCarBodyStyleOracle implements DaoInterfaceBodyStyle {
     PreparedStatement addBodyStylePreparedStatement;
     PreparedStatement deleteBodyStylePreparedStatement;
     PreparedStatement updateBodyStylePreparedStatement;
+    PreparedStatement getAllBodyStylePreparedStatement;
 
     public DaoCarBodyStyleOracle()
     {
@@ -30,6 +36,7 @@ public class DaoCarBodyStyleOracle implements DaoInterfaceBodyStyle {
             deleteBodyStylePreparedStatement = connection.prepareStatement("");
             updateBodyStylePreparedStatement = connection.prepareStatement("");
             */
+            getAllBodyStylePreparedStatement = connection.prepareStatement("Select * from carBodyStyle");
         } catch (SQLException e) {
             DaoConnectionManager.getInstance().closeConnection();
             e.printStackTrace();
@@ -37,15 +44,19 @@ public class DaoCarBodyStyleOracle implements DaoInterfaceBodyStyle {
     }
     public void addBodyStyle(CarBodyStyle carBodyStyle) {
         try {
-            System.out.println("allo");
+
             System.out.println(carBodyStyle.getBodyStyle());
-            System.out.println(addBodyStylePreparedStatement + "   asd");
+
 
             addBodyStylePreparedStatement.setString(1, carBodyStyle.getBodyStyle());
-            //System.out.println(addBodyStylePreparedStatement);
+
             //TODO: trouver le bon ID
 
             addBodyStylePreparedStatement.executeUpdate();
+
+            addBodyStylePreparedStatement.getConnection().commit();
+
+
 
             /*ResultSet generatedKeysID = addCompagnyPreparedStatement.getGeneratedKeys();
 
@@ -103,6 +114,44 @@ public class DaoCarBodyStyleOracle implements DaoInterfaceBodyStyle {
             System.out.print("prob resultat query");
         }
     }
+
+    public List<CarBodyStyle> getAllBodyStyle() {
+        List<CarBodyStyle> bodyStyleList = new ArrayList<CarBodyStyle>();
+
+
+
+        try {
+
+            getAllBodyStylePreparedStatement.executeQuery();
+
+            ResultSet result = getAllBodyStylePreparedStatement.getResultSet();
+
+
+            while (result.next())
+            {
+                CarBodyStyle bodyStyle = new CarBodyStyle();
+
+                int carBodyStyleID = result.getInt(1);
+                String carBodyStyleName = result.getString(2);
+
+
+                System.out.println("ID car body style: " + carBodyStyleID + "   name body style : " + carBodyStyleName);
+
+                bodyStyle.setCarBodyStyleID(carBodyStyleID);
+                bodyStyle.setBodyStyle(carBodyStyleName);
+
+
+                bodyStyleList.add(bodyStyle);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bodyStyleList;
+    }
+
     private Connection getConnection(){
         return DaoConnectionManager.getInstance().getOracleConnection();
     }

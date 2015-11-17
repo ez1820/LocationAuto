@@ -2,10 +2,14 @@ package dao.DaoCarColor;
 
 import dao.DaoCarColor.DaoInterfaceColor;
 import dao.DaoConnectionManager;
+import model.CarBodyStyle;
 import model.CarCompany;
 import model.Color;
+import sun.org.mozilla.javascript.internal.ast.WhileLoop;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by admin on 2015-10-15.
@@ -17,6 +21,7 @@ public class DaoCarColorOracle implements DaoInterfaceColor {
     PreparedStatement addColorPreparedStatement;
     PreparedStatement deleteColorPreparedStatement;
     PreparedStatement updateColorPreparedStatement;
+    PreparedStatement getAllColorPreparedStatement;
 
     public DaoCarColorOracle(){
         loadPrepareStatement();
@@ -33,6 +38,8 @@ public class DaoCarColorOracle implements DaoInterfaceColor {
             deleteColorPreparedStatement = connection.prepareStatement("");
             updateColorPreparedStatement = connection.prepareStatement("");
             */
+
+            getAllColorPreparedStatement = connection.prepareStatement("Select * from Color");
         } catch (SQLException e) {
             DaoConnectionManager.getInstance().closeConnection();
             e.printStackTrace();
@@ -44,8 +51,7 @@ public class DaoCarColorOracle implements DaoInterfaceColor {
         try {
 
             addColorPreparedStatement.setString(1, color.getColorName());
-            //TODO: trouver le bon ID
-            //addCompagnyPreparedStatement.executeUpdate();
+
             addColorPreparedStatement.executeUpdate();
 
             /*ResultSet generatedKeysID = addCompagnyPreparedStatement.getGeneratedKeys();
@@ -105,6 +111,42 @@ public class DaoCarColorOracle implements DaoInterfaceColor {
             e.printStackTrace();
             System.out.print("prob resultat query");
         }
+    }
+
+    public List<Color> getAllColor() {
+
+        List<Color> colorList = new ArrayList<Color>();
+
+
+        try {
+
+            getAllColorPreparedStatement.executeQuery();
+
+            ResultSet result = getAllColorPreparedStatement.getResultSet();
+
+
+            while (result.next())
+            {
+                Color color = new Color();
+
+                int colorID = result.getInt(1);
+                String colorName = result.getString(2);
+
+
+
+                color.setColorID(colorID);
+                color.setColorName(colorName);
+
+                colorList.add(color);
+            }
+            getAllColorPreparedStatement.getConnection().commit();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return colorList;
     }
 
     private Connection getConnection(){

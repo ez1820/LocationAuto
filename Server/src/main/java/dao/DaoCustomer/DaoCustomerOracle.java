@@ -45,6 +45,7 @@ public class DaoCustomerOracle implements DaoInterfaceCustomer {
             //TODO: trouver le bon ID
             //addCompagnyPreparedStatement.executeUpdate();
             addCustomerPreparedStatement.executeUpdate();
+            addCustomerPreparedStatement.getConnection().commit();
 
             /*ResultSet generatedKeysID = addCompagnyPreparedStatement.getGeneratedKeys();
 

@@ -147,6 +147,26 @@ public class CarController {
         }
     }
 
+    public void insertCar(List<Car> carList)
+    {
+        System.out.println("Inserting Car");
+        int i=1;
+        for (Car c : carList)
+        {
+            insertCar(c);
+            i++;
+        }
+    }
+
+    private void insertCar(Car car)
+    {
+        if(car.getCarID() ==0)
+        {
+            Dao.getInstance().getDaoCar().addCar(car);
+        }
+    }
+
+
     public List<CarModel> getAllModels()
     {
         List<CarModel> carModelList;
@@ -159,8 +179,37 @@ public class CarController {
     {
         List<Transmission> carTransmissionList;
 
-        return null;
+        carTransmissionList = Dao.getInstance().getDaoTransmission().getAllTransmissions();
+
+
+        return carTransmissionList;
     }
+    public List<CarBodyStyle> getAllBodyStyle()
+    {
+        List<CarBodyStyle> carBodyStyleList;
+
+        carBodyStyleList = Dao.getInstance().getDaoBodyStyle().getAllBodyStyle();
+
+        return carBodyStyleList;
+    }
+
+    public List<Color> getAllColor()
+    {
+        List<Color> colorList;
+
+        colorList = Dao.getInstance().getDaoColor().getAllColor();
+
+        return colorList;
+    }
+    public List<CarLocation> getAllLocation()
+    {
+        List<CarLocation> colorList;
+
+        colorList = Dao.getInstance().getDaoLocation().getAllLocation();
+
+        return colorList;
+    }
+
 
 
 

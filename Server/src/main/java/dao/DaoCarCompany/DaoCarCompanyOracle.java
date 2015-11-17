@@ -55,7 +55,7 @@ public class DaoCarCompanyOracle implements DaoInterfaceCompany {
                 //carCompany.setCompanyID((int) generatedKeysID.getLong(1));
                 //System.out.println("blabla" + generatedKeysID.getLong(1));
             }
-
+            addCompagnyPreparedStatement.getConnection().commit();
             //carCompany.setCompanyID(id);
         } catch (SQLException e) {
             DaoConnectionManager.getInstance().closeConnection();

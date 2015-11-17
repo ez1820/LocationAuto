@@ -6,28 +6,26 @@ package model;
 public class Car {
     private int carID;
     private int carModelID;
-    private int carColorID;
     private int carBodyStyleID;
     private int year;
     private int colorID;
-    private float price;
-    private String model;
+    private double price;
     private int carLocationID;
+    private int transmissionID;
 
 
     public Car() {
 
     }
-    public Car(int carID, int carModelID, int carColorID, int carBodyStyleID, int carLocationID, int year, int colorID, float price, String model) {
+    public Car(int carID, int carModelID, int carBodyStyleID, int carLocationID, int year, int colorID, float price, int transmissionID) {
         this.carID = carID;
         this.carModelID = carModelID;
-        this.carColorID = carColorID;
         this.carBodyStyleID = carBodyStyleID;
         this.carLocationID = carLocationID;
         this.year = year;
         this.colorID = colorID;
         this.price = price;
-        this.model = model;
+        this.transmissionID = transmissionID;
     }
 
     public int getCarID() {
@@ -46,13 +44,6 @@ public class Car {
         this.carModelID = carModelID;
     }
 
-    public int getCarColorID() {
-        return carColorID;
-    }
-
-    public void setCarColorID(int carColorID) {
-        this.carColorID = carColorID;
-    }
 
     public int getCarBodyStyleID() {
         return carBodyStyleID;
@@ -78,20 +69,12 @@ public class Car {
         this.colorID = colorID;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
     }
 
     public int getCarLocationID() {
@@ -100,5 +83,13 @@ public class Car {
 
     public void setCarLocationID(int carLocationID) {
         this.carLocationID = carLocationID;
+    }
+
+    public int getTransmissionID() {
+        return transmissionID;
+    }
+
+    public void setTransmissionID(int transmissionID) {
+        this.transmissionID = transmissionID;
     }
 }

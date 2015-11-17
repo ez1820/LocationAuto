@@ -1,9 +1,12 @@
 package dao.DaoCarLocation;
 
 import dao.DaoConnectionManager;
+import model.CarBodyStyle;
 import model.CarLocation;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by admin on 2015-10-15.
@@ -12,6 +15,7 @@ public class DaoCarLocationOracle implements DaoInterfaceLocation {
     PreparedStatement addLocationPreparedStatement;
     PreparedStatement deleteLocationPreparedStatement;
     PreparedStatement updateLocationPreparedStatement;
+    PreparedStatement getAllLocationPreparedStatement;
 
     public DaoCarLocationOracle()
     {
@@ -28,6 +32,7 @@ public class DaoCarLocationOracle implements DaoInterfaceLocation {
             deleteBodyStylePreparedStatement = connection.prepareStatement("");
             updateBodyStylePreparedStatement = connection.prepareStatement("");
             */
+            getAllLocationPreparedStatement = connection.prepareStatement("Select * from carLocation");
         } catch (SQLException e) {
             DaoConnectionManager.getInstance().closeConnection();
             e.printStackTrace();
@@ -99,6 +104,39 @@ public class DaoCarLocationOracle implements DaoInterfaceLocation {
             e.printStackTrace();
             System.out.print("prob resultat query");
         }
+    }
+
+    public List<CarLocation> getAllLocation() {
+        List<CarLocation> locationList = new ArrayList<CarLocation>();
+
+        try {
+            getAllLocationPreparedStatement.executeQuery();
+
+            ResultSet result = getAllLocationPreparedStatement.getResultSet();
+
+            while (result.next())
+
+            {
+                CarLocation location = new CarLocation();
+
+                int carLocationID = result.getInt(1);
+                float carLocationX = result.getFloat(2);
+                float carLocationY = result.getFloat(3);
+
+
+                System.out.println("ID car location: " + carLocationID + "   location X : " + carLocationX + "   Location Y: " + carLocationY);
+
+                location.setCarLocationID(carLocationID);
+                location.setLocationX(carLocationX);
+                location.setLocationY(carLocationY);
+
+                locationList.add(location);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return locationList;
     }
 
     private Connection getConnection(){

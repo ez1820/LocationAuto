@@ -64,7 +64,7 @@ public class DaoCarModelOracle implements DaoInterfaceModel {
                 //carCompany.setCompanyID((int) generatedKeysID.getLong(1));
                 //System.out.println("blabla" + generatedKeysID.getLong(1));
             }
-
+            addModelPreparedStatement.getConnection().commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -122,21 +122,22 @@ public class DaoCarModelOracle implements DaoInterfaceModel {
 
         try {
 
+            getAllModelPreparedStatement.executeQuery();
             ResultSet result = getAllModelPreparedStatement.getResultSet();
 
-
-
-
-            if(result.next())
+            while(result.next())
             {
+
+
+
                 CarCompany carCompany =  new CarCompany();
                 CarModel carModel = new CarModel();
                 int carModelID = result.getInt(1);
                 int companyID = result.getInt(2);
                 String modelName = result.getString(3);
 
-                System.out.println("Id de la compagnie / " + companyID);
-                System.out.println("Id du modele  dans la compagnie /" + carModelID);
+                System.out.println("Id de la compagnie / " + companyID + "  Id du modele  dans la compagnie /" + carModelID + "  Model name: " + modelName);
+
 
                 carCompany.setCompanyID(carModelID);
                 carModel.setCarCompany(carCompany);
