@@ -18,7 +18,7 @@ package model;
 public class Node {
 
     private int nodeID;
-    private int NodeNumber ;
+    private long NodeNumber ;
     private float latX ;
     private float lonY ;
     private String tag ;
@@ -28,7 +28,7 @@ public class Node {
 
     }
 
-    public Node(int nodeID,int NodeNumber, float latX, float lonY, String tag) {
+    public Node(int nodeID,long NodeNumber, float latX, float lonY, String tag) {
         this.nodeID = nodeID;
         this.NodeNumber = NodeNumber ;
         this.latX = latX ;
@@ -52,14 +52,14 @@ public class Node {
 
 // get the node unique number
 
-    public int getNodeNumber () {
+    public long getNodeNumber () {
 
         return NodeNumber ;
     }
 
     // Set the node unique number
 
-    public void setNodeNumber (int NodeNumber){
+    public void setNodeNumber (long NodeNumber){
 
         this.NodeNumber = NodeNumber ;
     }

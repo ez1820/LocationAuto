@@ -1,9 +1,9 @@
 package dao.DaoNode;
 
 import dao.DaoConnectionManager;
-import model.Node ;
+import model.Node;
+
 import java.sql.*;
-import config.AppConfig.* ;
 
 /**
  * Created by EdgarsonRomeus on 15-11-15.
@@ -48,6 +48,9 @@ public class DaoNodeOracle implements DaoInterfaceNode {
 
             //TODO: trouver le bon ID
             addNodePreparedStatement.executeUpdate();
+
+            addNodePreparedStatement.getConnection().commit();
+
             //addCompagnyPreparedStatement.executeUpdate();
 
             /*ResultSet generatedKeysID = addCompagnyPreparedStatement.getGeneratedKeys();

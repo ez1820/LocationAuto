@@ -40,7 +40,7 @@ public class DaoCarOracle  implements DaoInterfaceCar {
 
     public void addCar(Car car) {
         try {
-
+            System.out.println("allo");
             addCarPreparedStatement.setInt(1, car.getCarModelID());
             addCarPreparedStatement.setInt(2, car.getCarLocationID());
             addCarPreparedStatement.setInt(3, car.getTransmissionID());

@@ -1,17 +1,12 @@
 package dataImporter;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
-import com.sun.security.auth.SolarisNumericUserPrincipal;
 import controller.CarController;
 import model.*;
 import org.json.simple.parser.ParseException;
 
-import javax.sound.midi.Soundbank;
-import javax.xml.stream.Location;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListResourceBundle;
 
 /**
  * Created by admin on 2015-11-05.
@@ -241,7 +236,7 @@ public class DataImporter {
 
             /*insert colorID*/
             int indexColor = (int) (Math.random() * colorList.size());
-            car.setCarID(colorList.get(indexColor).getColorID());
+            car.setColorID(colorList.get(indexColor).getColorID());
 
             carList.add(car);
         }

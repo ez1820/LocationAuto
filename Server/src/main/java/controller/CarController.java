@@ -3,7 +3,6 @@ package controller;
 import dao.Dao;
 import model.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -160,7 +159,7 @@ public class CarController {
 
     private void insertCar(Car car)
     {
-        if(car.getCarID() ==0)
+        if(car.getCarID() == 0)
         {
             Dao.getInstance().getDaoCar().addCar(car);
         }

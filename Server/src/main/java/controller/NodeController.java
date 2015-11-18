@@ -1,9 +1,8 @@
 package controller;
 
 import dao.Dao;
-import model.*;
+import model.Node;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,8 +16,8 @@ public class NodeController {
 
     public static NodeController  instance  = null ;
 
-    public static NodeController getInstance() {
-
+    public static NodeController getInstance()
+    {
 
         if (instance == null ){
 
@@ -27,7 +26,8 @@ public class NodeController {
         return instance ;
     }
 
-    public synchronized static void createNodeController () {
+    public synchronized static void createNodeController ()
+    {
 
         if(instance == null){
 
@@ -36,7 +36,7 @@ public class NodeController {
 
     }
 
- private NodeController () {}
+    private NodeController () {}
 
     public void insertNode(List<Node> nodeList)
     {
@@ -54,9 +54,7 @@ public class NodeController {
     {
         if(node.getNodeID() == 0)
         {
-
             Dao.getInstance().getDaoNode().addNode(node);
-
         }
     }
 }
